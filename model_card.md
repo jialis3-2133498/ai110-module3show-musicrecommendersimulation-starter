@@ -1,111 +1,33 @@
 # 🎧 Model Card: Music Recommender Simulation
 
-## 1. Model Name  
+## 1 . Model Name
+VibeMatch Recommender
 
-Give your model a short, descriptive name.  
-Example: **VibeFinder 1.0**  
+## 2. Goal / Task
+Our system suggests music songs based on user preferences. It predicts which songs a person might like.
 
----
+## 3. Data Used
+We use 17 songs from a CSV file. Each song has genre, mood, energy level, and other features. The data covers pop, rock, lofi, and more genres. It misses some moods like sad or angry.
 
-## 2. Intended Use  
+## 4. Algorithm Summary
+We score songs by matching genre, mood, and energy. Genre match gives 1 point. Mood match gives 1 point. Energy match gives 0-2 points based on how close it is. Higher score means better match.
 
-Describe what your recommender is designed to do and who it is for. 
+## 5. Observed Behavior / Biases
+The system's energy similarity scoring uses a linear penalty that heavily disadvantages songs with energy levels differing by more than 0.5 from the user's target, effectively eliminating potentially good matches that align perfectly in genre and mood but have mismatched energy. This creates a significant bias against users seeking very low-energy (calm, meditative) or very high-energy (extreme, intense) music, as the dataset's energy range of 0.25-0.95 doesn't adequately cover these extremes, resulting in consistently lower recommendation quality for such users. Additionally, the rigid exact-matching for genre and mood prevents cross-pollination between related but non-identical categories, trapping users in filter bubbles where they're never exposed to adjacent musical styles that might suit their preferences.
 
-Prompts:  
-
-- What kind of recommendations does it generate  
-- What assumptions does it make about the user  
-- Is this for real users or classroom exploration  
-
----
-
-## 3. How the Model Works  
-
-Explain your scoring approach in simple language.  
-
-Prompts:  
-
-- What features of each song are used (genre, energy, mood, etc.)  
-- What user preferences are considered  
-- How does the model turn those into a score  
-- What changes did you make from the starter logic  
-
-Avoid code here. Pretend you are explaining the idea to a friend who does not program.
+## 6. Evaluation Process
+We tested the recommender with three distinct user profiles: High-Energy Pop (pop genre, intense mood, 0.9 energy), Chill Lofi (lofi genre, chill mood, 0.4 energy), and Deep Intense Rock (rock genre, intense mood, 0.9 energy). For each profile, we examined the top 5 recommendations, looking for logical ranking based on genre/mood/energy matches and overall score coherence. We ran the system with both original weights (genre +2.0, mood +1.0, energy 0-1.0) and modified weights (genre +1.0, mood +1.0, energy 0-2.0) to test sensitivity. What surprised us was how dramatically rankings shifted with the weight change - songs with near-perfect energy matches jumped positions despite lacking genre alignment, revealing the system's vulnerability to scoring parameter tweaks and potential for unintended biases.
 
 ---
 
-## 4. Data  
+## 7. Intended Use and Non-Intended Use 
 
-Describe the dataset the model uses.  
+Use for fun music discovery in class. Don't use for real music apps or professional recommendations.
 
-Prompts:  
+## 8. Ideas for Improvement
 
-- How many songs are in the catalog  
-- What genres or moods are represented  
-- Did you add or remove data  
-- Are there parts of musical taste missing in the dataset  
+Add fuzzy matching for genres. Include acoustic preference in scoring. Add diversity to avoid same recommendations.
 
----
+## 9. Personal Reflection
 
-## 5. Strengths  
-
-Where does your system seem to work well  
-
-Prompts:  
-
-- User types for which it gives reasonable results  
-- Any patterns you think your scoring captures correctly  
-- Cases where the recommendations matched your intuition  
-
----
-
-## 6. Limitations and Bias 
-
-Where the system struggles or behaves unfairly. 
-
-Prompts:  
-
-- Features it does not consider  
-- Genres or moods that are underrepresented  
-- Cases where the system overfits to one preference  
-- Ways the scoring might unintentionally favor some users  
-
----
-
-## 7. Evaluation  
-
-How you checked whether the recommender behaved as expected. 
-
-Prompts:  
-
-- Which user profiles you tested  
-- What you looked for in the recommendations  
-- What surprised you  
-- Any simple tests or comparisons you ran  
-
-No need for numeric metrics unless you created some.
-
----
-
-## 8. Future Work  
-
-Ideas for how you would improve the model next.  
-
-Prompts:  
-
-- Additional features or preferences  
-- Better ways to explain recommendations  
-- Improving diversity among the top results  
-- Handling more complex user tastes  
-
----
-
-## 9. Personal Reflection  
-
-A few sentences about your experience.  
-
-Prompts:  
-
-- What you learned about recommender systems  
-- Something unexpected or interesting you discovered  
-- How this changed the way you think about music recommendation apps  
+My biggest learning moment was seeing how tweaking the scoring weights completely changed the recommendations - it made me realize how sensitive these systems are to design choices, and why real-world recommenders need careful tuning. AI tools were super helpful for generating code, explaining concepts, but I had to double-check them, especially the logic and outputs to ensure correctness. Things about simple algorithms surprised me is that they capture basic preferences well, making results seem intuitive even without complexity. For future extended project, probably I can add more features like tempo, implement diversity, expand dataset.  

@@ -124,7 +124,11 @@ Use this section to document the experiments you ran. For example:
 - What happened when you added tempo or valence to the score
 - How did your system behave for different types of users
 
-![alt text](image.png)
+![recommendations (song titles, scores, and reasons)](image.png)
+
+![High-Energy Pop Recommendation](image-1.png)
+![Chill Lofi Recommendation](image-2.png)
+![Deep Intense Rock Recommendation](image-3.png)
 
 ---
 
@@ -152,6 +156,12 @@ Write 1 to 2 paragraphs here about what you learned:
 
 - about how recommenders turn data into predictions
 - about where bias or unfairness could show up in systems like this
+
+My biggest learning moment during this project was realizing how small changes in the scoring algorithm could drastically alter the recommendations. When we doubled the energy weight and halved the genre weight, songs that were previously ranked low jumped to the top, showing me just how sensitive these systems are to their design parameters. It made me appreciate why real-world recommenders need extensive testing and fine-tuning.
+
+AI tools helped me a lot by quickly generating code for modifications and explaining concepts, but I always double-checked their suggestions, especially for the math in the scoring function, to ensure accuracy. What surprised me was how a simple algorithm based on just genre, mood, and energy could produce recommendations that "feel" intelligent and personalized - it captured enough of the user's basic preferences to seem intuitive, even without complex machine learning.
+
+If I extended this project, I'd experiment with adding user feedback to refine recommendations over time, incorporating more audio features like tempo and danceability, and testing with a much larger dataset to see how the system handles diversity and cold-start problems.
 
 
 ---
